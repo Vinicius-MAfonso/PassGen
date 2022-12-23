@@ -1,0 +1,21 @@
+Gerador de senha
+
+Descrição do projeto:
+
+O projeto visa desenvolver uma aplicação de para o gerar senhas não repetidas ao usuário
+
+
+
+REQUISITOS: 
+	*A aplicação deve gerar senha
+	*A aplicação deve ter a opção de gerar senhas com números, sem números, letras alpha...
+	*A aplicação deve salvar essas senhas em um banco de dados para serem retornadas depois em um arquivo
+
+REGRAS DE NEGÓCIO:
+	- As senhas não devem repetir
+	- As senhas devem ser guardadas de alguma forma para o usuário verificar depois
+
+
+ENTIDADES:
+
+
