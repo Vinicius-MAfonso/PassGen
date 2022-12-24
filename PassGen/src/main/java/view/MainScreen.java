@@ -1,10 +1,15 @@
 package view;
 
-public class MainScreen extends javax.swing.JFrame {
+import controller.PasswordController;
+import model.Password;
 
+public class MainScreen extends javax.swing.JFrame {
+private PasswordController controller;
     public MainScreen() {
         initComponents();
+        decorate();
         setVisible(true);
+        setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -15,17 +20,18 @@ public class MainScreen extends javax.swing.JFrame {
         jTextFieldPasswordGenerated = new javax.swing.JTextField();
         jLabelSubTitle = new javax.swing.JLabel();
         jLabelTitle = new javax.swing.JLabel();
-        jRadioButtonUpper = new javax.swing.JRadioButton();
-        jRadioButtonLower = new javax.swing.JRadioButton();
-        jRadioButtonSimbols = new javax.swing.JRadioButton();
-        jRadioButtonNumbers = new javax.swing.JRadioButton();
         jButtonGenerate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jSliderLength = new javax.swing.JSlider();
         jLabelLength = new javax.swing.JLabel();
         jLabelLengthConf = new javax.swing.JLabel();
+        jRadioButtonSymbols = new javax.swing.JRadioButton();
+        jRadioButtonUpper = new javax.swing.JRadioButton();
+        jRadioButtonLower = new javax.swing.JRadioButton();
+        jRadioButtonNumbers = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GenPassword");
@@ -35,66 +41,72 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTextFieldPasswordGenerated.setEditable(false);
         jTextFieldPasswordGenerated.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldPasswordGenerated.setColumns(50);
+        jTextFieldPasswordGenerated.setColumns(60);
         jTextFieldPasswordGenerated.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldPasswordGenerated.setForeground(new java.awt.Color(0, 0, 0));
-        jTextFieldPasswordGenerated.setText("TESTE");
-        jTextFieldPasswordGenerated.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPasswordGeneratedActionPerformed(evt);
-            }
-        });
+        jTextFieldPasswordGenerated.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelSubTitle.setForeground(new java.awt.Color(0, 0, 0));
         jLabelSubTitle.setText("Senhas anteriores");
 
-        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabelTitle.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("Senha gerada");
-
-        jRadioButtonUpper.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButtonUpper.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButtonUpper.setSelected(true);
-        jRadioButtonUpper.setText("Letra maiúscula");
-
-        jRadioButtonLower.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButtonLower.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButtonLower.setSelected(true);
-        jRadioButtonLower.setText("Letra minúscula");
-
-        jRadioButtonSimbols.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButtonSimbols.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButtonSimbols.setText("Símbolos");
-
-        jRadioButtonNumbers.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButtonNumbers.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButtonNumbers.setText("Números");
 
         jButtonGenerate.setBackground(new java.awt.Color(221, 34, 34));
         jButtonGenerate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonGenerate.setForeground(new java.awt.Color(255, 255, 255));
         jButtonGenerate.setText("Gerar");
+        jButtonGenerate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonGenerateMouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jSliderLength.setBackground(new java.awt.Color(255, 255, 255));
         jSliderLength.setForeground(new java.awt.Color(0, 0, 0));
-        jSliderLength.setMaximum(50);
+        jSliderLength.setMaximum(55);
         jSliderLength.setMinimum(4);
+        jSliderLength.setValue(30);
         jSliderLength.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jSliderLengthMouseReleased(evt);
             }
         });
 
-        jLabelLength.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelLength.setForeground(new java.awt.Color(0, 0, 0));
         jLabelLength.setText("Tamanho");
 
         jLabelLengthConf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelLengthConf.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelLengthConf.setText("0");
+        jLabelLengthConf.setText("30");
+
+        jRadioButtonSymbols.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonSymbols.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButtonSymbols.setText("Símbolos");
+        jRadioButtonSymbols.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jRadioButtonUpper.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonUpper.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButtonUpper.setSelected(true);
+        jRadioButtonUpper.setText("Letra maiúscula");
+        jRadioButtonUpper.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jRadioButtonLower.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonLower.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButtonLower.setSelected(true);
+        jRadioButtonLower.setText("Letra minúscula");
+        jRadioButtonLower.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jRadioButtonNumbers.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonNumbers.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButtonNumbers.setSelected(true);
+        jRadioButtonNumbers.setText("Números");
+        jRadioButtonNumbers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -107,9 +119,13 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jSliderLength, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabelLength)
-                .addGap(159, 159, 159))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonUpper)
+                    .addComponent(jRadioButtonLower)
+                    .addComponent(jRadioButtonNumbers)
+                    .addComponent(jRadioButtonSymbols)
+                    .addComponent(jLabelLength))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +136,14 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelLengthConf)
                     .addComponent(jSliderLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonUpper)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonLower)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonNumbers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonSymbols))
         );
 
         jList1.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,65 +157,57 @@ public class MainScreen extends javax.swing.JFrame {
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Personalize sua senha");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jTextFieldPasswordGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonNumbers, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButtonLower, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButtonUpper, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jTextFieldPasswordGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(134, 134, 134)
+                                .addComponent(jLabelSubTitle)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(202, 202, 202)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelSubTitle)
-                            .addComponent(jLabelTitle)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 215, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonSimbols, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonGenerate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelTitle)
                 .addGap(11, 11, 11)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPasswordGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelSubTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelSubTitle))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonUpper)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonLower)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonNumbers)))
-                        .addGap(2, 2, 2)
-                        .addComponent(jRadioButtonSimbols)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonGenerate))
-                    .addComponent(jScrollPane1))
-                .addGap(74, 74, 74))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonGenerate))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,22 +218,35 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldPasswordGeneratedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPasswordGeneratedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPasswordGeneratedActionPerformed
-
     private void jSliderLengthMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSliderLengthMouseReleased
-        jLabelLengthConf.setText(new Integer(jSliderLength.getValue()).toString());
+        jLabelLengthConf.setText(Integer.valueOf(jSliderLength.getValue()).toString());
     }//GEN-LAST:event_jSliderLengthMouseReleased
+
+    private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
+        Password password = new Password();
+        
+        password.setLength(jSliderLength.getValue());
+        password.setUseUpper(jRadioButtonUpper.isSelected());
+        password.setUseLower(jRadioButtonLower.isSelected());
+        password.setUseNumbers(jRadioButtonNumbers.isSelected());
+        password.setUseSymbols(jRadioButtonSymbols.isSelected());
+        
+        password.build();
+        //Conexão com o banco...
+        //e atualização na lista de senhas anteriores
+        jTextFieldPasswordGenerated.setText(password.getPassword().toString());
+        
+    }//GEN-LAST:event_jButtonGenerateMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGenerate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLength;
     private javax.swing.JLabel jLabelLengthConf;
     private javax.swing.JLabel jLabelSubTitle;
@@ -228,10 +256,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButtonLower;
     private javax.swing.JRadioButton jRadioButtonNumbers;
-    private javax.swing.JRadioButton jRadioButtonSimbols;
+    private javax.swing.JRadioButton jRadioButtonSymbols;
     private javax.swing.JRadioButton jRadioButtonUpper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSliderLength;
     private javax.swing.JTextField jTextFieldPasswordGenerated;
     // End of variables declaration//GEN-END:variables
+    public void decorate(){
+        
+    }
 }

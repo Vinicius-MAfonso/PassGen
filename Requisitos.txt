@@ -17,5 +17,7 @@ REGRAS DE NEGÓCIO:
 
 
 ENTIDADES:
+	-Senha
+	
 
 
