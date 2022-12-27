@@ -13,7 +13,6 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() {
         initComponents();
-        decorate();
         loadData();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -273,9 +272,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JSlider jSliderLength;
     private javax.swing.JTextField jTextFieldPasswordGenerated;
     // End of variables declaration//GEN-END:variables
-    private void decorate(){
-        
-    }
     private void loadData(){
         controller = new PasswordController();
         List<Password> list = controller.getAll();
