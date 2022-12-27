@@ -5,6 +5,7 @@ import java.util.Random;
 public class Password {
     private Random random = new Random();
     private StringBuilder password;
+    private int id;
     private int length;
     private boolean useNumbers;
     private boolean useSymbols;
@@ -12,7 +13,18 @@ public class Password {
     private boolean useLower;
     
     public Password(){}
-
+    
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public void setPassword(String password){
+        this.password = new StringBuilder(password);
+    }
     public StringBuilder getPassword() {
         return password;
     } 
