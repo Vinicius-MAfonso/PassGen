@@ -36,8 +36,9 @@ public class MainScreen extends javax.swing.JFrame {
         jRadioButtonLower = new javax.swing.JRadioButton();
         jRadioButtonNumbers = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
+        jListPreviousPasswords = new javax.swing.JList<>();
+        jLabelCustomYourPass = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GenPassword");
@@ -152,21 +153,30 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jRadioButtonSymbols))
         );
 
-        jList1.setBackground(new java.awt.Color(255, 255, 255));
-        jList1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jList1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jList1.setForeground(new java.awt.Color(0, 0, 0));
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jListPreviousPasswords.setBackground(new java.awt.Color(255, 255, 255));
+        jListPreviousPasswords.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jListPreviousPasswords.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jListPreviousPasswords.setForeground(new java.awt.Color(0, 0, 0));
+        jListPreviousPasswords.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListPreviousPasswords.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
+                jListPreviousPasswordsMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListPreviousPasswords);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Personalize sua senha");
+        jLabelCustomYourPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelCustomYourPass.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelCustomYourPass.setText("Personalize sua senha");
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Limpar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,7 +188,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelCustomYourPass, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(134, 134, 134)
                                 .addComponent(jLabelSubTitle))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -186,7 +196,9 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1))))
                         .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -204,13 +216,16 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jTextFieldPasswordGenerated, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelCustomYourPass)
                     .addComponent(jLabelSubTitle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonGenerate, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonGenerate))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
         );
@@ -250,18 +265,26 @@ public class MainScreen extends javax.swing.JFrame {
         jTextFieldPasswordGenerated.setText(password.getPassword().toString());
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        jTextFieldPasswordGenerated.setText(jList1.getSelectedValue());
-    }//GEN-LAST:event_jList1MouseClicked
+    private void jListPreviousPasswordsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPreviousPasswordsMouseClicked
+        jTextFieldPasswordGenerated.setText(jListPreviousPasswords.getSelectedValue());
+    }//GEN-LAST:event_jListPreviousPasswordsMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        controller = new PasswordController();
+        controller.clear();
+        jTextFieldPasswordGenerated.setText("");
+        loadData();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonGenerate;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelCustomYourPass;
     private javax.swing.JLabel jLabelLength;
     private javax.swing.JLabel jLabelLengthConf;
     private javax.swing.JLabel jLabelSubTitle;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jListPreviousPasswords;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButtonLower;
@@ -279,6 +302,6 @@ public class MainScreen extends javax.swing.JFrame {
         for(Password currentPass : list){
             model.addElement(currentPass.getPassword().toString());
         }
-        jList1.setModel(model);
+        jListPreviousPasswords.setModel(model);
     }
 }

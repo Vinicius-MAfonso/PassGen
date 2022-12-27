@@ -18,8 +18,10 @@ public class ConnectionFactory {
             c = DriverManager.getConnection(URL,USR, PASS);
         }catch(ClassNotFoundException e){
             System.err.println("Driver não foi encontrado!");
+            System.exit(1);
         }catch(SQLException sqle){
             System.err.println("A conexão falhou!" + sqle);
+            System.exit(1);
         }
         return c;
     }

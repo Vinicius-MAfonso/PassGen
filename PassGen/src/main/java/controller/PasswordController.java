@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import model.Password;
 import util.ConnectionFactory;
@@ -21,7 +20,21 @@ public class PasswordController {
             statement.setString(1, pass.getPassword().toString());
             statement.execute();
         }catch(SQLException sqle){
-            System.err.println("Erro ao salvar o projeto!"+sqle);
+            System.err.println("Erro ao salvar o projeto:"+sqle);
+        }finally{
+            ConnectionFactory.closeConnection(connection, statement);
+        }
+    }
+    public void clear(){
+        String sql = "DELETE FROM passwords";
+        PreparedStatement statement = null;
+        Connection connection = null;
+        try{
+            connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.execute();
+        }catch(SQLException sqle){
+            System.err.println("Erro ao limpar o banco:"+sqle);
         }finally{
             ConnectionFactory.closeConnection(connection, statement);
         }
@@ -43,7 +56,7 @@ public class PasswordController {
                 list.add(pass);
             }
         }catch(SQLException sqle){
-            System.err.println("Erro ao recuperar os dados!"+sqle);
+            System.err.println("Erro ao recuperar os dados:"+sqle);
         }finally{
             ConnectionFactory.closeConnection(connection, statement);
         }
