@@ -1,7 +1,6 @@
 package view;
 
 import controller.PasswordController;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Password;
